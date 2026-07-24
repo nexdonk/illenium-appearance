@@ -1,6 +1,14 @@
 MIT License
 
 Copyright (c) 2021 snakewiz
+Copyright (c) 2021-present iLLeniumStudios (illenium-appearance contributors)
+Copyright (c) 2026 NEX Development | Donk (UI redesign and modifications)
+
+This distribution is a modified version of the original "illenium-appearance"
+software. The user interface (NUI/web layer) has been redesigned and portions
+of the accompanying client Lua code (including NUI event/callback names and
+related handlers) have been edited to integrate with the redesigned UI. The
+original, unmodified software remains available from its upstream authors.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

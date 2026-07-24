@@ -1,12 +1,10 @@
 fx_version "cerulean"
 game "gta5"
-
-author "snakewiz & iLLeniumStudios"
-description "A flexible player customization script for FiveM servers."
-repository "https://github.com/iLLeniumStudios/illenium-appearance"
-version "main"
-
 lua54 "yes"
+
+author "snakewiz & iLLeniumStudios (redesign by NEX.dev)"
+description "A flexible player customization script for FiveM servers."
+version "main"
 
 client_scripts {
   "game/constants.lua",
@@ -90,7 +88,8 @@ shared_scripts {
 
 files {
   "web/dist/index.html",
-  "web/dist/assets/*.js"
+  "web/dist/assets/*.js",
+  "web/dist/images/*.png",
 }
 
 ui_page "web/dist/index.html"
