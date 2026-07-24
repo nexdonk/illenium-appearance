@@ -2,79 +2,79 @@ Locales["en"] = {
     UI = {
         modal = {
             save = {
-                title = "Save customization",
-                description = "You will remain ugly"
+                title = "Lock in this look?",
+                description = "Your character will step out wearing exactly this."
             },
             exit = {
-                title = "Exit customization",
-                description = "No changes will be saved"
+                title = "Walk away from changes?",
+                description = "Anything you touched in here gets rolled back."
             },
-            accept = "Yes",
-            decline = "No"
+            accept = "Yes, do it",
+            decline = "Not yet"
         },
         ped = {
-            title = "Ped",
-            model = "Model"
+            title = "Identity",
+            model = "Body type"
         },
         headBlend = {
-            title = "Inheritance",
+            title = "Heritage",
             shape = {
-                title = "Face",
-                firstOption = "Father",
-                secondOption = "Mother",
-                mix = "Mix"
+                title = "Face shape",
+                firstOption = "Parent A",
+                secondOption = "Parent B",
+                mix = "Blend"
             },
             skin = {
-                title = "Skin",
-                firstOption = "Father",
-                secondOption = "Mother",
-                mix = "Mix"
+                title = "Skin tone",
+                firstOption = "Parent A",
+                secondOption = "Parent B",
+                mix = "Blend"
             },
             race = {
-                title = "Race",
-                shape = "Shape",
-                skin = "Skin",
-                mix = "Mix"
+                title = "Ancestry",
+                shape = "Face influence",
+                skin = "Skin influence",
+                mix = "Blend"
             }
         },
         faceFeatures = {
-            title = "Face Features",
+            title = "Sculpt the face",
             nose = {
                 title = "Nose",
                 width = "Width",
                 height = "Height",
-                size = "Size",
-                boneHeight = "Bone height",
-                boneTwist = "Bone twist",
-                peakHeight = "Peak height"
+                size = "Tip size",
+                boneHeight = "Bridge height",
+                boneTwist = "Bridge twist",
+                peakHeight = "Tip lift"
             },
             eyebrows = {
-                title = "Eyebrows",
-                height = "Height",
-                depth = "Depth"
+                title = "Brow line",
+                height = "Lift",
+                depth = "Push"
             },
             cheeks = {
                 title = "Cheeks",
-                boneHeight = "Bone height",
-                boneWidth = "Bone width",
-                width = "Width"
+                boneHeight = "Cheekbone lift",
+                boneWidth = "Cheekbone width",
+                width = "Fullness"
             },
             eyesAndMouth = {
-                title = "Eyes and Mouth",
-                eyesOpening = "Eyes opening",
-                lipsThickness = "Lip thickness"
+                title = "Eyes & mouth",
+                eyesOpening = "Eye openness",
+                lipsThickness = "Lip fullness"
             },
             jaw = {
                 title = "Jaw",
                 width = "Width",
-                size = "Size"
+                size = "Heft"
             },
             chin = {
                 title = "Chin",
-                lowering = "Lowering",
+                lowering = "Drop",
                 length = "Length",
                 size = "Size",
-                hole = "Hole size"
+                hole = "Dimple"
             },
             neck = {
                 title = "Neck",
@@ -82,73 +82,73 @@ Locales["en"] = {
             }
         },
         headOverlays = {
-            title = "Appearance",
+            title = "Skin & details",
             hair = {
                 title = "Hair",
-                style = "Style",
-                color = "Color",
+                style = "Cut",
+                color = "Main color",
                 highlight = "Highlight",
                 texture = "Texture",
                 fade = "Fade"
             },
-            opacity = "Opacity",
+            opacity = "Strength",
             style = "Style",
             color = "Color",
-            secondColor = "Secondary Color",
+            secondColor = "Accent color",
             blemishes = "Blemishes",
-            beard = "Beard",
-            eyebrows = "Eyebrows",
-            ageing = "Ageing",
-            makeUp = "Make up",
+            beard = "Facial hair",
+            eyebrows = "Brows",
+            ageing = "Age lines",
+            makeUp = "Makeup",
             blush = "Blush",
             complexion = "Complexion",
-            sunDamage = "Sun damage",
+            sunDamage = "Sun-kissed",
             lipstick = "Lipstick",
-            moleAndFreckles = "Mole and Freckles",
+            moleAndFreckles = "Moles & freckles",
             chestHair = "Chest hair",
-            bodyBlemishes = "Body blemishes",
+            bodyBlemishes = "Body marks",
             eyeColor = "Eye color"
         },
         components = {
-            title = "Clothes",
-            drawable = "Drawable",
-            texture = "Texture",
+            title = "Wardrobe",
+            drawable = "Style",
+            texture = "Variant",
             mask = "Mask",
-            upperBody = "Hands",
-            lowerBody = "Legs",
-            bags = "Bags and parachute",
+            upperBody = "Arms & gloves",
+            lowerBody = "Pants",
+            bags = "Bag / parachute",
             shoes = "Shoes",
-            scarfAndChains = "Scarf and chains",
-            shirt = "Shirt",
+            scarfAndChains = "Scarf & chains",
+            shirt = "Undershirt",
             bodyArmor = "Body armor",
             decals = "Decals",
-            jackets = "Jackets",
-            head = "Head"
+            jackets = "Jacket",
+            head = "Hat slot"
         },
         props = {
-            title = "Props",
-            drawable = "Drawable",
-            texture = "Texture",
-            hats = "Hats and helmets",
+            title = "Finishing touches",
+            drawable = "Style",
+            texture = "Variant",
+            hats = "Hats & helmets",
             glasses = "Glasses",
-            ear = "Ear",
-            watches = "Watches",
-            bracelets = "Bracelets"
+            ear = "Earpiece",
+            watches = "Watch",
+            bracelets = "Bracelet"
         },
         tattoos = {
-            title = "Tattoos",
+            title = "Ink",
             items = {
                 ZONE_TORSO = "Torso",
-                ZONE_HEAD = "Head",
+                ZONE_HEAD = "Head & neck",
                 ZONE_LEFT_ARM = "Left arm",
                 ZONE_RIGHT_ARM = "Right arm",
                 ZONE_LEFT_LEG = "Left leg",
                 ZONE_RIGHT_LEG = "Right leg"
             },
-            apply = "Apply",
-            delete = "Remove",
-            deleteAll = "Remove all Tattoos",
-            opacity = "Opacity"
+            apply = "Ink it",
+            delete = "Erase",
+            deleteAll = "Erase every tattoo",
+            opacity = "Boldness"
         }
     },
     outfitManagement = {
@@ -157,8 +157,8 @@ Locales["en"] = {
         gangText = "Manage outfits for Gang"
     },
     cancelled = {
-        title = "Cancelled Customization",
-        description = "Customization not saved"
+        title = "Look discarded",
+        description = "Nothing you touched stuck — you're back to how you started."
     },
     outfits = {
         import = {
