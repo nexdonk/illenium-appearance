@@ -1,0 +1,82 @@
+name: Announce Release on Discord
+
+on:
+  release:
+    types: [published]
+  # Manual re-announce for an existing release (e.g. after editing the notes).
+  # Pick a tag from the Actions tab and run.
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Existing release tag to re-announce (e.g. v1.1.1)'
+        required: true
+        type: string
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # When triggered manually, the `release` event payload isn't available.
+      # Pull the live release data via the GitHub API and expose it as env
+      # vars so the announce step can use the same code path either way.
+      - name: Resolve release (manual dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_TAG: ${{ inputs.release_tag }}
+        run: |
+          payload=$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/${INPUT_TAG}")
+          {
+            echo "MANUAL_RELEASE_TAG=$(jq -r '.tag_name' <<<"$payload")"
+            echo "MANUAL_RELEASE_NAME=$(jq -r '.name // .tag_name' <<<"$payload")"
+            echo "MANUAL_RELEASE_URL=$(jq -r '.html_url' <<<"$payload")"
+            echo "MANUAL_RELEASE_PUBLISHED_AT=$(jq -r '.published_at' <<<"$payload")"
+            # Release body can be multi-line; use a heredoc delimiter.
+            echo 'MANUAL_RELEASE_BODY<<__END_OF_BODY__'
+            jq -r '.body // ""' <<<"$payload"
+            echo '__END_OF_BODY__'
+          } >> "$GITHUB_ENV"
+
+      - name: Post release announcement
+        env:
+          DISCORD_BOT_TOKEN:     ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_CHANNEL_ID:    ${{ secrets.DISCORD_CHANNEL_ID }}
+          DISCORD_PING_ROLE_IDS: ${{ vars.DISCORD_PING_ROLE_IDS }}
+
+          BRAND_NAME:   ${{ vars.BRAND_NAME }}
+          EMBED_COLOR:  ${{ vars.EMBED_COLOR }}
+
+          STORE_URL_TEMPLATE: ${{ vars.STORE_URL_TEMPLATE }}
+          DOCS_URL_TEMPLATE:  ${{ vars.DOCS_URL_TEMPLATE }}
+          CFX_URL_TEMPLATE:   ${{ vars.CFX_URL_TEMPLATE }}
+
+          STORE_URL_OVERRIDE: ${{ vars.STORE_URL }}
+          DOCS_URL_OVERRIDE:  ${{ vars.DOCS_URL }}
+          CFX_URL_OVERRIDE:   ${{ vars.CFX_URL }}
+
+          BANNER_OVERRIDE_URL: ${{ vars.BANNER_OVERRIDE_URL }}
+
+          REPO_FULL:           ${{ github.repository }}
+          REPO_NAME:           ${{ github.event.repository.name }}
+          REPO_OWNER:          ${{ github.repository_owner }}
+          REPO_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+
+          RELEASE_TAG:          ${{ github.event.release.tag_name || env.MANUAL_RELEASE_TAG }}
+          RELEASE_NAME:         ${{ github.event.release.name || env.MANUAL_RELEASE_NAME }}
+          RELEASE_BODY:         ${{ github.event.release.body || env.MANUAL_RELEASE_BODY }}
+          RELEASE_URL:          ${{ github.event.release.html_url || env.MANUAL_RELEASE_URL }}
+          RELEASE_PUBLISHED_AT: ${{ github.event.release.published_at || env.MANUAL_RELEASE_PUBLISHED_AT }}
+        run: node .github/scripts/build-discord-payload.mjs
