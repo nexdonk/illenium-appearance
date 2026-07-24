@@ -1,7 +1,14 @@
 Framework = {}
 
 function Framework.ESX()
-    return GetResourceState("es_extended") ~= "missing"
+    local state = GetResourceState("es_extended")
+    if state == "missing" then return false end
+
+    while GetResourceState("es_extended") ~= "started" do
+        Wait(50)
+    end
+
+    return true
 end
 
 function Framework.QBCore()
