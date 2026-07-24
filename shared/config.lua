@@ -7,6 +7,8 @@ Config.BarberCost = 100
 Config.TattooCost = 100
 Config.SurgeonCost = 100
 
+Config.DisableDataPanel = false -- Set to true to hide the Import/Export launcher button and panel entirely.
+
 Config.ChargePerTattoo = true -- Charge players per tattoo. Config.TattooCost will become the cost of 1 tattoo. The cost can be overridden by adding `cost` key in shared/tattoos.lua for specific tattoos
 
 -- Only set this to true if you're using rcore_tattoos
@@ -34,7 +36,7 @@ Config.EnablePedsForClothingRooms = true
 Config.EnablePedsForPlayerOutfitRooms = true
 
 Config.EnablePedMenu = true
-Config.PedMenuGroup = "group.admin"
+Config.PedMenuGroup = "group.mod"
 
 Config.EnableJobOutfitsCommand = false -- Enables /joboutfits and /gangoutfits commands
 
@@ -373,6 +375,32 @@ Config.Stores = {
         }
     },
     {
+        type = "clothing",
+        coords = vector4(468.2026, -1001.628, 30.68942, 0),
+        size = vector3(4, 4, 4),
+        rotation = 45,
+        usePoly = false,
+        points = {
+            vector3(99,99,99),
+            vector3(99,99,99),
+            vector3(99,99,99),
+            vector3(99,99,99),
+        }
+    },
+    {
+        type = "clothing",
+        coords = vector4(468.13467, -1007.815, 30.689401, 0),
+        size = vector3(4, 4, 4),
+        rotation = 45,
+        usePoly = false,
+        points = {
+            vector3(99,99,99),
+            vector3(99,99,99),
+            vector3(99,99,99),
+            vector3(99,99,99),
+        }
+    },
+    {
         type = "barber",
         coords = vector4(-814.22, -183.7, 37.57, 116.91),
         size = vector3(4, 4, 4),
@@ -558,23 +586,23 @@ Config.Stores = {
 
 
 Config.ClothingRooms = {
-    {
-        job = "police",
-        coords = vector4(454.91, -990.89, 30.69, 193.4),
-        size = vector3(4, 4, 4),
-        rotation = 45,
-        usePoly = false,
-        points = {
-            vector3(460.41918945312, -993.11444091797, 30.69),
-            vector3(449.39508056641, -993.60614013672, 30.69),
-            vector3(449.88696289062, -990.23779296875, 30.69),
-            vector3(450.97882080078, -989.71411132812, 30.69),
-            vector3(451.0325012207, -987.89904785156, 30.69),
-            vector3(453.47863769531, -987.76928710938, 30.69),
-            vector3(454.35513305664, -988.46459960938, 30.69),
-            vector3(460.4231262207, -987.94573974609, 30.69)
-        }
-    }
+    -- {
+    --     job = "police",
+    --     coords = vector4(454.91, -990.89, 30.69, 193.4),
+    --     size = vector3(4, 4, 4),
+    --     rotation = 45,
+    --     usePoly = false,
+    --     points = {
+    --         vector3(460.41918945312, -993.11444091797, 30.69),
+    --         vector3(449.39508056641, -993.60614013672, 30.69),
+    --         vector3(449.88696289062, -990.23779296875, 30.69),
+    --         vector3(450.97882080078, -989.71411132812, 30.69),
+    --         vector3(451.0325012207, -987.89904785156, 30.69),
+    --         vector3(453.47863769531, -987.76928710938, 30.69),
+    --         vector3(454.35513305664, -988.46459960938, 30.69),
+    --         vector3(460.4231262207, -987.94573974609, 30.69)
+    --     }
+    -- }
 }
 
 
