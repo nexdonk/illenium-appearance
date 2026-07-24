@@ -454,6 +454,16 @@ function client.rotateCamera(direction)
     end
 end
 
+-- Gyro drag: rotate the ped by an absolute delta in degrees, no animation
+function client.pedRotateDelta(delta)
+    local ped = cache.ped
+    if not ped or ped == 0 then return end
+    local heading = GetEntityHeading(ped) + (tonumber(delta) or 0)
+    if heading < 0 then heading = heading + 360.0 end
+    if heading >= 360 then heading = heading - 360.0 end
+    SetEntityHeading(ped, heading + 0.0)
+end
+
 local playerCoords
 local function pedTurn(ped, angle)
     reverseCamera = not reverseCamera
@@ -551,56 +561,76 @@ function client.startPlayerCustomization(cb, conf)
     setCamera("default")
     SetNuiFocus(true, true)
     SetNuiFocusKeepInput(false)
-    RenderScriptCams(true, false, 0, true, true)
+    -- Smoothly interpolate from the gameplay camera into the menu camera (1.2s ease)
+    RenderScriptCams(true, true, 250, true, true)
     SetEntityInvincible(cache.ped, Config.InvincibleDuringCustomization)
     TaskStandStill(cache.ped, -1)
 
     if Config.HideRadar then DisplayRadar(false) end
 
+    local accent
+    if Config.Theme and Config.Theme.themes then
+        for _, theme in ipairs(Config.Theme.themes) do
+            if theme.id == Config.Theme.currentTheme then
+                accent = theme.primaryBackground
+                break
+            end
+        end
+    end
+
     SendNuiMessage(json.encode({
-        type = "appearance_display",
+        type = "nex_appearance_display",
         payload = {
-            asynchronous = Config.AsynchronousLoading
+            asynchronous = Config.AsynchronousLoading,
+            accent = accent,
         }
     }))
 end
 
+exports("startPlayerCustomization", client.startPlayerCustomization)
+
 function client.exitPlayerCustomization(appearance)
-    RenderScriptCams(false, false, 0, true, true)
-    DestroyCam(cameraHandle, false)
     SetNuiFocus(false, false)
+    SendNuiMessage(json.encode({
+        type = "nex_appearance_hide",
+        payload = {}
+    }))
+
+    RenderScriptCams(false, true, 250, true, true)
+    local handleToDestroy = cameraHandle
+    cameraHandle = nil
+    if handleToDestroy then
+        CreateThread(function()
+            Wait(300) -- 250 ms ease + small buffer
+            DestroyCam(handleToDestroy, false)
+        end)
+    end
 
     if Config.HideRadar then DisplayRadar(true) end
 
     ClearPedTasksImmediately(cache.ped)
     SetEntityInvincible(cache.ped, false)
 
-    SendNuiMessage(json.encode({
-        type = "appearance_hide",
-        payload = {}
-    }))
-
     if not appearance then
-        client.setPlayerAppearance(getAppearance())
+        local snapshot = getAppearance()
+        CreateThread(function()
+            client.setPlayerAppearance(snapshot)
+        end)
     else
         client.setPedTattoos(cache.ped, appearance.tattoos)
     end
 
-    RestorePlayerStats()
-
-    if callback then
-        callback(appearance)
-    end
-
+    local cb = callback
     callback = nil
     config = nil
     playerAppearance = nil
     playerCoords = nil
-    cameraHandle = nil
     currentCamera = nil
     reverseCamera = nil
     isCameraInterpolating = nil
 
+    if cb then cb(appearance) end
+    CreateThread(RestorePlayerStats)
 end
 
 AddEventHandler("onResourceStop", function(resource)
@@ -609,5 +639,3 @@ AddEventHandler("onResourceStop", function(resource)
         SetNuiFocusKeepInput(false)
     end
 end)
-
-exports("startPlayerCustomization", client.startPlayerCustomization)

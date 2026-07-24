@@ -341,8 +341,16 @@ constants.DATA_CLOTHES = {
 
 constants.CAMERAS = {
     default = {
-        vec3(0, 2.2, 0.2),
-        vec3(0, 0, -0.05),
+        -- Camera 3m back and raised to z=1.0 — a ~15° downward tilt that
+        -- feels like a flattering "looking-down-a-little" angle without
+        -- pushing the feet out of the frame.
+        vec3(0, 3.0, 1.00),
+        -- Look-at at upper-chest height (z=0.20) and shifted to the ped's
+        -- right (+x in ped-local coords). The high look-at keeps the head's
+        -- angle from the look-axis small (~8°) so the head sits at ~35% from
+        -- the top of the view — well clear of the upper edge. The +x shift
+        -- slides the ped toward screen-right to clear the left panel UI.
+        vec3(0.30, 0, 0.20),
     },
     head = {
         vec3(0, 0.9, 0.65),
@@ -356,6 +364,10 @@ constants.CAMERAS = {
         vec3(0, 0.98, -0.7),
         vec3(0, 0, -0.9),
     },
+    clothing = {
+        vec3(0, 2.6, 0.05),
+        vec3(0, 0, 0.0),
+    },
 }
 
 constants.OFFSETS = {
@@ -363,4 +375,5 @@ constants.OFFSETS = {
     head = vec2(0.7, -0.45),
     body = vec2(1.2, -0.45),
     bottom = vec2(0.7, -0.45),
+    clothing = vec2(1.6, -1.1),
 }

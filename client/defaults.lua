@@ -36,6 +36,7 @@ function GetDefaultConfig()
         tattoos = false,
         enableExit = true,
         hasTracker = Config.PreventTrackerRemoval and Framework.HasTracker(),
-        automaticFade = Config.AutomaticFade
+        automaticFade = Config.AutomaticFade,
+        disableDataPanel = Config.DisableDataPanel or false
     }
 end
