@@ -1,6 +1,20 @@
 Config.Theme = {
-    currentTheme = "qb-core",
+    currentTheme = "default",
     themes = {
+        {
+            id = "sky-blue",
+            borderRadius = "3vh",
+            fontColor = "255, 255, 255",
+            fontColorHover = "255, 255, 255",
+            fontColorSelected = "255, 255, 255",
+            fontFamily = "Inter",
+            primaryBackground = "14, 165, 233",
+            primaryBackgroundSelected = "14, 165, 233",
+            secondaryBackground = "15, 23, 42",
+            scaleOnHover = true,
+            sectionFontWeight = "bold",
+            smoothBackgroundTransition = true
+        },
         {
             id = "default",
             borderRadius = "4px",
@@ -8,8 +22,8 @@ Config.Theme = {
             fontColorHover = "255, 255, 255",
             fontColorSelected = "0, 0, 0",
             fontFamily = "Inter",
-            primaryBackground = "0, 0, 0",
-            primaryBackgroundSelected = "255, 255, 255",
+            primaryBackground = "34, 211, 238",
+            primaryBackgroundSelected = "34, 211, 238",
             secondaryBackground = "0, 0, 0",
             scaleOnHover = false,
             sectionFontWeight = "normal",
